@@ -13,6 +13,7 @@ import { Container, Btn, Eyebrow, PageHero, Img, PostCard, ProductCard, PartnerW
 import { ContactForm, BrochureForm, NewsletterForm } from "@/components/Forms";
 import { AddToCart, CartView, ClearCart, type CartProduct } from "@/components/ShopClient";
 import ShareBar from "@/components/ShareBar";
+import ProductGallery from "@/components/ProductGallery";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://plant-e.com";
 
@@ -641,14 +642,7 @@ async function ProductPage({ l, slug }: { l: Locale; slug: string }) {
     <Container className="py-12 sm:py-16">
       <Link href={href("shop", l)} className="text-sm font-bold text-lime-dark">← {s.all[l]}</Link>
       <div className="mt-6 grid gap-12 lg:grid-cols-2">
-        <div className="grid gap-3">
-          <Img src={p.images[0]} alt={t(p.title, l)} className="aspect-square w-full rounded-[2rem] bg-mist object-cover" />
-          {p.images.length > 1 && (
-            <div className="grid grid-cols-4 gap-3">
-              {p.images.slice(1, 9).map((src) => <a key={src} href={src} target="_blank" rel="noopener"><Img src={src} alt="" className="aspect-square w-full rounded-2xl bg-mist object-cover" /></a>)}
-            </div>
-          )}
-        </div>
+        <ProductGallery images={p.images.slice(0, 10)} alt={t(p.title, l)} locale={l} />
         <div>
           <h1 className="text-3xl font-extrabold leading-tight text-forest sm:text-4xl" lang={shownLang(p.title, l)}>{t(p.title, l)}</h1>
           <p className="mt-4 text-2xl font-bold text-forest">{formatPrice(p.priceCents, l)} <span className="text-sm font-normal text-stone">{s.vat[l]}</span></p>
