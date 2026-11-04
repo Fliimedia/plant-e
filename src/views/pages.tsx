@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { href, shopCategories, type Locale, type Match, type ShopCategory } from "@/lib/routes";
 import {
   ui, home, sensorPages, sensorShared, technology, about, team, careers, contact, newsletter, newsPage, projectsPage, faq,
-  shopCategoryText,
+  shopCategoryText, productPartners, aboutPartners, newsHighlights, inTheNews, faqImage, shopImages, shopExtra, contactMap,
 } from "@/content/site";
 import { getPosts, getPost, getProducts, getProduct, getJobs, getJob, getLegal, t, shownLang, type LegalKey } from "@/lib/data";
 import { renderMarkdown, formatDate, formatPrice } from "@/lib/markdown";
@@ -13,6 +13,10 @@ import { AddToCart, CartView, ClearCart, type CartProduct } from "@/components/S
 
 const Prose = ({ md, lang }: { md: string; lang?: string }) => (
   <div className="prose-plant text-[17px]" lang={lang} dangerouslySetInnerHTML={{ __html: renderMarkdown(md) }} />
+);
+
+const Icon = ({ d, className }: { d: string; className?: string }) => (
+  <svg viewBox="0 0 512 545.5" fill="currentColor" className={className} aria-hidden><path d={d} /></svg>
 );
 
 /* ---------- Home ---------- */
@@ -173,7 +177,7 @@ async function Sensor({ l, k }: { l: Locale; k: "groundwater" | "soil" | "waterq
           <div className="mt-8"><Btn to={href("projects", l)} variant="outline">{sensorShared.allProjects[l]}</Btn></div>
         </Container>
       )}
-      <PartnerWall locale={l} />
+      <PartnerWall locale={l} list={productPartners} />
       <CtaBand locale={l} />
     </>
   );
@@ -184,7 +188,9 @@ function Technology({ l }: { l: Locale }) {
   const tch = technology;
   return (
     <>
-      <PageHero eyebrow={ui.nav.technology[l]} title={tch.title[l]} intro={tch.intro[l]} />
+      <PageHero eyebrow={ui.nav.technology[l]} title={tch.title[l]} intro={tch.intro[l]}>
+        <Icon d={tch.icon} className="mt-8 h-12 w-12 text-lime-dark" />
+      </PageHero>
       <Container className="grid gap-6 py-16 md:grid-cols-2">
         {tch.images.map((src) => <Img key={src} src={src} alt="" className="w-full rounded-3xl bg-mist" />)}
       </Container>
@@ -205,6 +211,7 @@ function Technology({ l }: { l: Locale }) {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {tch.impact.map((x) => (
               <div key={x.title.nl} className="rounded-3xl bg-white/5 p-7 ring-1 ring-white/10">
+                <Icon d={x.icon} className="mb-5 h-10 w-10 text-lime" />
                 <h3 className="text-xl font-extrabold text-lime">{x.title[l]}</h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-white/75">{x.text[l]}</p>
               </div>
@@ -224,7 +231,34 @@ async function PostList({ l, kind }: { l: Locale; kind: "project" | "news" }) {
   return (
     <>
       <PageHero eyebrow={kind === "project" ? ui.nav.projects[l] : ui.nav.news[l]} title={page.title[l]} intro={page.intro[l]} />
-      <Container className="py-16">
+      {kind === "news" && (
+        <>
+          <Container className="pt-12">
+            <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
+              {newsHighlights.map((h) => {
+                const card = (
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-forest">
+                    <Img src={h.image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-forest via-forest/30 to-transparent" aria-hidden />
+                    <h2 className="absolute inset-x-0 bottom-0 p-6 font-display text-xl font-extrabold leading-snug text-white">{h.title[l]}</h2>
+                  </div>
+                );
+                return (
+                  <div key={h.image} className="w-[78%] shrink-0 snap-start sm:w-auto">
+                    {h.post ? <Link href={href("post", l, { slug: h.post })} className="block transition hover:-translate-y-0.5">{card}</Link> : card}
+                  </div>
+                );
+              })}
+            </div>
+          </Container>
+          <Container className="max-w-4xl pt-14">
+            <h2 className="text-3xl font-extrabold text-forest">{inTheNews.title[l]}</h2>
+            <div className="mt-4"><Prose md={inTheNews.intro[l]} /></div>
+            <h2 className="mt-12 text-2xl font-extrabold text-forest">{inTheNews.postsTitle[l]}</h2>
+          </Container>
+        </>
+      )}
+      <Container className={kind === "news" ? "py-8" : "py-16"}>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{posts.map((p) => <PostCard key={p.slug} post={p} locale={l} />)}</div>
       </Container>
       <NewsletterBand l={l} />
@@ -292,7 +326,7 @@ function About({ l }: { l: Locale }) {
           </Link>
         ))}
       </Container>
-      <PartnerWall locale={l} />
+      <PartnerWall locale={l} list={aboutPartners} />
     </>
   );
 }
@@ -304,10 +338,16 @@ function Team({ l }: { l: Locale }) {
       <Container className="py-16"><Img src={team.image} alt={team.title[l]} className="w-full rounded-[2rem] object-cover" /></Container>
       <Container>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {team.members.map(([name, role]) => (
-            <div key={name} className="rounded-3xl border border-line p-6">
+          {team.members.map(([name, role, linkedin]) => (
+            <div key={name} className="flex flex-col rounded-3xl border border-line p-6">
               <h3 className="font-display text-lg font-extrabold text-forest">{name}</h3>
               <p className="mt-1 text-sm text-stone">{role}</p>
+              {linkedin && (
+                <a href={linkedin} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex w-fit items-center gap-2 text-sm font-bold text-forest hover:text-lime-dark" aria-label={`${name} op LinkedIn`}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 110-4.14 2.07 2.07 0 010 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" /></svg>
+                  LinkedIn
+                </a>
+              )}
             </div>
           ))}
         </div>
@@ -374,6 +414,9 @@ function Contact({ l }: { l: Locale }) {
           <a href={contact.maps} target="_blank" rel="noopener noreferrer" className="mt-3 block text-white/80 underline-offset-4 hover:underline">{contact.address}</a>
         </aside>
       </Container>
+      <Container>
+        <iframe src={contactMap} title={contact.address} loading="lazy" className="h-[420px] w-full rounded-[2rem] border-0 bg-mist" />
+      </Container>
     </>
   );
 }
@@ -385,7 +428,10 @@ function Faq({ l }: { l: Locale }) {
       <Container className="max-w-4xl py-16">
         {faq.groups.map((g) => (
           <section key={g.title.nl} className="mb-14">
-            <h2 className="mb-5 text-2xl font-extrabold text-forest">{g.title[l]}</h2>
+            <div className="mb-5 flex items-center gap-4">
+              <Img src={faqImage} alt="" className="h-14 w-14 object-contain" />
+              <h2 className="text-2xl font-extrabold text-forest">{g.title[l]}</h2>
+            </div>
             <div className="divide-y divide-line border-y border-line">
               {g.items.map((it) => (
                 <details key={it.q.nl} className="group py-5">
@@ -399,6 +445,11 @@ function Faq({ l }: { l: Locale }) {
             </div>
           </section>
         ))}
+        <section className="rounded-3xl bg-mist p-8">
+          <h2 className="text-2xl font-extrabold text-forest">{inTheNews.title[l]}</h2>
+          <p className="mt-3 text-stone">{inTheNews.faqText[l]}</p>
+          <div className="mt-6"><Btn to={href("news", l)}>{inTheNews.faqCta[l]}</Btn></div>
+        </section>
       </Container>
       <CtaBand locale={l} />
     </>
@@ -432,7 +483,7 @@ async function Shop({ l, cat }: { l: Locale; cat?: ShopCategory }) {
   const cats = Object.keys(shopCategoryText) as ShopCategory[];
   return (
     <>
-      <PageHero eyebrow={s.title[l]} title={cat ? shopCategoryText[cat].title[l] : s.all[l]} intro={cat ? shopCategoryText[cat].text[l] : s.intro[l]} />
+      <PageHero eyebrow={s.title[l]} title={cat ? shopCategoryText[cat].title[l] : s.all[l]} intro={cat ? shopCategoryText[cat].text[l] : s.intro[l]} image={shopImages.hero} />
       <Container className="py-10">
         <div className="flex flex-wrap gap-2">
           <Link href={href("shop", l)} className={`rounded-full px-5 py-2.5 text-sm font-bold ${!cat ? "bg-forest text-white" : "bg-mist text-forest hover:bg-line"}`}>{s.all[l]}</Link>
@@ -445,11 +496,39 @@ async function Shop({ l, cat }: { l: Locale; cat?: ShopCategory }) {
           {products.map((p) => <ProductCard key={p.slug} product={p} locale={l} />)}
         </div>
       </Container>
-      <Container className="mt-10 grid gap-6 md:grid-cols-2">
-        <div className="rounded-3xl bg-mist p-8">
-          <h2 className="text-2xl font-extrabold text-forest">{s.customTitle[l]}</h2>
-          <p className="mt-3 text-stone">{s.customText[l]}</p>
-          <div className="mt-6"><Btn to={href("contact", l)}>{ui.contactUs[l]}</Btn></div>
+      {!cat && (
+        <Container className="mt-10">
+          <h2 className="text-3xl font-extrabold text-forest">{s.categories[l]}</h2>
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {cats.map((c) => (
+              <Link key={c} href={href("shopCategory", l, { cat: shopCategories[c][l] })} className="group overflow-hidden rounded-3xl border border-line bg-white">
+                <div className="aspect-[4/3] overflow-hidden bg-mist"><Img src={shopImages.categories[c]} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /></div>
+                <div className="p-6">
+                  <h3 className="font-display text-xl font-extrabold text-forest">{shopCategoryText[c].title[l]}</h3>
+                  <p className="mt-2 text-[15px] text-stone">{shopCategoryText[c].text[l]}</p>
+                  <span className="mt-4 inline-block text-sm font-bold text-forest">{shopExtra.discover[l]} →</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </Container>
+      )}
+      <Container className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="overflow-hidden rounded-3xl bg-mist">
+          <Img src={shopImages.custom} alt="" className="aspect-[16/9] w-full object-cover" />
+          <div className="p-8">
+            <h2 className="text-2xl font-extrabold text-forest">{s.customTitle[l]}</h2>
+            <p className="mt-3 text-stone">{s.customText[l]}</p>
+            <div className="mt-6"><Btn to={href("contact", l)}>{ui.contactUs[l]}</Btn></div>
+          </div>
+        </div>
+        <div className="overflow-hidden rounded-3xl bg-mist">
+          <Img src={shopImages.expo} alt="" className="aspect-[16/9] w-full object-cover" />
+          <div className="p-8">
+            <h2 className="text-2xl font-extrabold text-forest">{shopExtra.expoTitle[l]}</h2>
+            <p className="mt-3 text-stone">{shopExtra.expoText[l]}</p>
+            <div className="mt-6"><Btn to={href("news", l)}>{shopExtra.discover[l]}</Btn></div>
+          </div>
         </div>
         <div className="rounded-3xl bg-forest p-8 text-white">
           <h2 className="text-2xl font-extrabold">{newsletter.title[l]}</h2>
@@ -468,6 +547,10 @@ async function ProductPage({ l, slug }: { l: Locale; slug: string }) {
   const stock = p.stock === "in_stock" ? s.inStock : p.stock === "backorder" ? s.backorder : s.outOfStock;
   const lang = shownLang(p.body, l);
   return (
+    <>
+    <div className="relative h-40 overflow-hidden bg-forest sm:h-56">
+      <Img src={shopImages.productHeader} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70" />
+    </div>
     <Container className="py-12 sm:py-16">
       <Link href={href("shop", l)} className="text-sm font-bold text-lime-dark">← {s.all[l]}</Link>
       <div className="mt-6 grid gap-12 lg:grid-cols-2">
@@ -494,6 +577,7 @@ async function ProductPage({ l, slug }: { l: Locale; slug: string }) {
         </div>
       </div>
     </Container>
+    </>
   );
 }
 
@@ -515,6 +599,7 @@ function Thanks({ l }: { l: Locale }) {
   return (
     <Container className="max-w-2xl py-24 text-center">
       <ClearCart />
+      <Img src={shopImages.thanks} alt="" className="mx-auto mb-10 aspect-[16/9] w-full rounded-[2rem] object-cover" />
       <div className="mx-auto mb-8 grid h-16 w-16 place-items-center rounded-full bg-lime text-3xl text-forest">✓</div>
       <h1 className="text-4xl font-extrabold text-forest">{ui.shop.thanksTitle[l]}</h1>
       <p className="mt-5 text-lg text-stone">{ui.shop.thanksText[l]}</p>

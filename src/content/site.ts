@@ -375,12 +375,13 @@ export const technology = {
     L("Dit resterende deel wordt door de wortels uitgescheiden in de grond. Rondom deze wortels leven bacteriën die dit organische materiaal afbreken. Tijdens dit afbraakproces komen elektronen als bijproduct vrij.", "This remaining part is excreted into the soil by the roots. Bacteria living around the roots break down this organic matter, releasing electrons as a by-product."),
     L("Plant-e heeft een systeem ontwikkeld waarmee we de vrijgekomen elektronen kunnen gebruiken als elektriciteit. Na gebruik worden deze elektronen opnieuw vrijgegeven in de grond, waardoor de cirkel compleet is.", "Plant-e has developed a system that lets us use these released electrons as electricity. After use, the electrons are released back into the soil, completing the circle."),
   ],
+  icon: "M241.5 96s61.5 19.88 61.5 71c0 23.55-7.816 41.514-13.5 52 .93 20.555.293 41.76-2.5 63 3.693-12.454 13.096-39.608 31-56 28.384-25.968 80.5-18.5 80.5-18.5s4.992 28.996-26 60.5c-30.186 30.684-83.694 21.03-86.5 20.5-3.964 26.39-11.18 52.395-21.5 76.5 12.91-17.148 40.978-47 78.5-47 39.632 0 65.5 21.5 65.5 21.5s-23.176 58.5-75 58.5c-46.87 0-70.602-16.662-75-20-1.657 3.346-3.202 6.755-5 10-29.338 52.968-78.852 92-150 92v-16c65.412 0 108.683-34.18 136-83.5.54-.974.974-2.015 1.5-3-9.54 4.327-26.05 10-51 10-61.456-.016-80.5-68.5-80.5-68.5s29.704-19.584 61-16c53.34 6.096 71.736 42.33 77.5 60 10.65-23.807 17.995-50.244 22-77-8.692 2.116-25.625 5.055-51 .5-39.632-7.104-63.928-35.912-69-73 0 0 37.756-13.72 67.5-3 30.606 11.027 47.126 42.485 54.5 60.5 1.642-15.68 1.977-31.258 1.5-46.5-14.61-8.438-41.062-28.31-45.5-60-5.84-41.904 13.5-68.5 13.5-68.5z",
   impactTitle: L("Positieve klimaatimpact van de Plant-e technologie", "The positive climate impact of Plant-e technology"),
   impact: [
-    { title: L("CO2-opslag", "CO2 storage"), text: L("Planten gebruiken CO2 om organisch materiaal te produceren. Ze slaan dus CO2 op terwijl wij stroom maken.", "Plants use CO2 to produce organic matter, so they store CO2 while we generate power.") },
-    { title: L("50% methaanreductie", "50% methane reduction"), text: L("Het opwekken van elektriciteit via Plant-e technologie leidt tot een afname van 50% van de methaanvorming in de bodem. Omdat methaan een 25 keer krachtiger broeikasgas is dan CO2, levert dit een substantieel positief effect op het klimaat op.", "Generating electricity with Plant-e technology reduces methane formation in the soil by 50%. Since methane is a 25 times more potent greenhouse gas than CO2, this has a substantial positive effect on the climate.") },
-    { title: L("Duurzaamheid", "Durability"), text: L("De materialen in het Plant-e systeem zijn volledig inert, waardoor ze niet afbreken of oplossen in de bodem. Dit zorgt voor een levensduur van 50 tot 100 jaar. We streven voortdurend naar de meest duurzame materiaalopties.", "The materials in the Plant-e system are completely inert, so they do not degrade or dissolve in the soil. This ensures a lifetime of 50 to 100 years. We continuously look for the most sustainable material options.") },
-    { title: L("Productie 24/7", "24/7 production"), text: L("Met continue energieproductie, dag en nacht, is er nauwelijks energieopslag zoals een batterij nodig, wat zorgt voor efficiënt energieverbruik.", "With continuous energy production, day and night, there is hardly any need for energy storage such as a battery, ensuring efficient energy use.") },
+    { icon: "M736 576q0 13-9.5 22.5T704 608t-22.5-9.5T672 576q0-46-54-71t-106-25q-13 0-22.5-9.5T480 448t9.5-22.5T512 416q50 0 99.5 16t87 54 37.5 90zm160 0q0-72-34.5-134t-90-101.5-123-62T512 256t-136.5 22.5-123 62-90 101.5T128 576q0 101 68 180 10 11 30.5 33t30.5 33q128 153 141 298h228q13-145 141-298 10-11 30.5-33t30.5-33q68-79 68-180zm128 0q0 155-103 268-45 49-74.5 87t-59.5 95.5-34 107.5q47 28 47 82 0 37-25 64 25 27 25 64 0 52-45 81 13 23 13 47 0 46-31.5 71t-77.5 25q-20 44-60 70t-87 26-87-26-60-70q-46 0-77.5-25t-31.5-71q0-24 13-47-45-29-45-81 0-37 25-64-25-27-25-64 0-54 47-82-4-50-34-107.5T177.5 931 103 844Q0 731 0 576q0-99 44.5-184.5t117-142 164-89T512 128t186.5 32.5 164 89 117 142T1024 576z", title: L("CO2-opslag", "CO2 storage"), text: L("Planten gebruiken CO2 om organisch materiaal te produceren. Ze slaan dus CO2 op terwijl wij stroom maken.", "Plants use CO2 to produce organic matter, so they store CO2 while we generate power.") },
+    { icon: "M288 384l62-62-94-98-107 107L0 128l149 128 107-112 131 141 61-61v160H288z", title: L("50% methaanreductie", "50% methane reduction"), text: L("Het opwekken van elektriciteit via Plant-e technologie leidt tot een afname van 50% van de methaanvorming in de bodem. Omdat methaan een 25 keer krachtiger broeikasgas is dan CO2, levert dit een substantieel positief effect op het klimaat op.", "Generating electricity with Plant-e technology reduces methane formation in the soil by 50%. Since methane is a 25 times more potent greenhouse gas than CO2, this has a substantial positive effect on the climate.") },
+    { icon: "M400 165q27 41 27 91 0 70-50.5 120.5T256 427v64l-85-86 85-85v64q53 0 90.5-37.5T384 256q0-30-15-60l31-31zm-144-37q-53 0-90.5 37.5T128 256q0 33 15 60l-31 31q-27-41-27-91 0-70 50.5-120.5T256 85V21l85 86-85 85v-64z", title: L("Duurzaamheid", "Durability"), text: L("De materialen in het Plant-e systeem zijn volledig inert, waardoor ze niet afbreken of oplossen in de bodem. Dit zorgt voor een levensduur van 50 tot 100 jaar. We streven voortdurend naar de meest duurzame materiaalopties.", "The materials in the Plant-e system are completely inert, so they do not degrade or dissolve in the soil. This ensures a lifetime of 50 to 100 years. We continuously look for the most sustainable material options.") },
+    { icon: "M342 149q16 0 29 13.5t13 29.5v117l-75 75v64H203v-64l-75-75V192q0-16 13-29.5t29-13.5h1V64h42v85h86V64h42l1 85z", title: L("Productie 24/7", "24/7 production"), text: L("Met continue energieproductie, dag en nacht, is er nauwelijks energieopslag zoals een batterij nodig, wat zorgt voor efficiënt energieverbruik.", "With continuous energy production, day and night, there is hardly any need for energy storage such as a battery, ensuring efficient energy use.") },
   ],
 };
 
@@ -406,10 +407,10 @@ export const team = {
   ),
   image: "/media/2025/07/cropped-cropped-Teamday-June-2025_2-scaled-1.jpg",
   members: [
-    ["Marjolein Helder", "CEO"], ["Paulien van Straten", "COO"], ["Daniel Groen", "Head of R&D"], ["Pim de Jager", "R&D"],
-    ["Hadi Rajaei", "Field Experimental Engineer"], ["Justin Vievermanns", "Accountmanager"], ["Sharon Polman", "Business Development"],
-    ["Junya Nakasugi", "Business Development"], ["Annelies Brakshoofden", "Management Assistant"], ["Silvia van Kempen", "Management Assistant"],
-  ] as [string, string][],
+    ["Marjolein Helder", "CEO", "https://www.linkedin.com/in/marjoleinhelder/"], ["Paulien van Straten", "COO", "https://www.linkedin.com/in/paulienvanstraten/"], ["Daniel Groen", "Head of R&D", "https://www.linkedin.com/in/daniel-groen-8241a574/"], ["Pim de Jager", "R&D"],
+    ["Hadi Rajaei", "Field Experimental Engineer", "https://www.linkedin.com/in/hadi-rajaei-7a94765a/"], ["Justin Vievermanns", "Accountmanager", "https://www.linkedin.com/in/justin-vievermanns/"], ["Sharon Polman", "Business Development", "https://www.linkedin.com/in/sharon-polman-57543495/"],
+    ["Junya Nakasugi", "Business Development", "https://www.linkedin.com/in/junya-nakasugi/"], ["Annelies Brakshoofden", "Management Assistant", "https://www.linkedin.com/in/anneliesbrakshoofden/"], ["Silvia van Kempen", "Management Assistant", "https://www.linkedin.com/in/silviavankempen/"],
+  ] as [string, string, string?][],
 };
 
 export const careers = {
@@ -486,24 +487,186 @@ export const faq: { title: T; groups: FaqGroup[] } = {
   ],
 };
 
-export const partners: { name: string; logo: string }[] = [
-  ["Natural England", "2025/09/Natural-England.jpg"], ["North Pennines", "2025/09/North-Pennines.png"],
-  ["Cairngorms", "2025/09/Cairngorms.png"], ["National Parks & Wildlife Service", "2025/09/NWPS.jpg"],
-  ["Belmonte Arboretum", "2025/09/Belmonte-Arboretum.jpg"], ["Division Q", "2025/09/Division-Q.png"],
-  ["De Enk groen & golf", "2025/09/De-Enk-groen-golf.png"], ["Wageningen University & Research", "2023/02/cropped-WUR-300x219-1.png"],
-  ["Slough Borough Council", "2023/02/Slough-300x150-1.jpg"], ["IRNAS", "2023/02/IRNAS-300x62-1.png"],
-  ["Glastuinbouw Nederland", "2025/09/Glastuinbouw-Nederland.png"], ["Stichting Kennis in je Kas", "2025/09/Stichting-Kennis-in-je-Kas.png"],
-  ["European Innovation Council", "2023/02/cropped-image001.png"], ["Forres Golf Course", "2025/09/Forres-Golf-Course.png"],
-  ["Van den Berk boomkwekerijen", "2025/09/Van-den-Berk-boomkwekerijen.png"], ["EcoSentinel", "2025/09/EcoSentinel.png"],
-  ["LTO Noord", "2025/09/LTO-Noord.png"], ["De Verschilmakerij", "2025/09/De-Verschilmakerij.png"],
-  ["Gemeente Rotterdam", "2023/02/Gemeente-Rotterdam-247x150-1.png"], ["RVO", "2023/02/RVO-400x150-1.png"],
-  ["NXP", "2023/02/NXP-1-300x108-1.png"], ["Hoogheemraadschap Delfland", "2025/09/Hoogheemraadschap-Delfland.png"],
-  ["Rijkswaterstaat", "2025/09/Rijkswaterstaat.png"], ["Veenweiden Innovatiecentrum", "2025/09/Veenweiden-innovatie-centrum.png"],
-  ["Waterschap De Dommel", "2025/09/Waterschap-de-Dommel.png"],
-].map(([name, logo]) => ({ name, logo: `/media/${logo}` }));
+export type Partner = { name: string; logo: string; href?: string };
+
+export const partners: Partner[] = [
+  { name: "Natural England", logo: "/media/2025/09/Natural-England.jpg" },
+  { name: "North Pennines", logo: "/media/2025/09/North-Pennines.png" },
+  { name: "Cairngorms", logo: "/media/2025/09/Cairngorms.png" },
+  { name: "National Parks & Wildlife Service", logo: "/media/2025/09/NWPS.jpg" },
+  { name: "Belmonte Arboretum", logo: "/media/2025/09/Belmonte-Arboretum.jpg" },
+  { name: "Division Q", logo: "/media/2025/09/Division-Q.png" },
+  { name: "De Enk groen & golf", logo: "/media/2025/09/De-Enk-groen-golf.png" },
+  { name: "Wageningen University & Research", logo: "/media/2023/02/cropped-WUR-300x219-1.png" },
+  { name: "Slough Borough Council", logo: "/media/2023/02/Slough-300x150-1.jpg" },
+  { name: "IRNAS", logo: "/media/2023/02/IRNAS-300x62-1.png" },
+  { name: "Glastuinbouw Nederland", logo: "/media/2025/09/Glastuinbouw-Nederland.png" },
+  { name: "Stichting Kennis in je Kas", logo: "/media/2025/09/Stichting-Kennis-in-je-Kas.png" },
+  { name: "European Innovation Council", logo: "/media/2023/02/cropped-image001.png" },
+  { name: "Forres Golf Course", logo: "/media/2025/09/Forres-Golf-Course.png" },
+  { name: "Van den Berk boomkwekerijen", logo: "/media/2025/09/Van-den-Berk-boomkwekerijen.png" },
+  { name: "EcoSentinel", logo: "/media/2025/09/EcoSentinel.png" },
+  { name: "LTO Noord", logo: "/media/2025/09/LTO-Noord.png" },
+  { name: "De Verschilmakerij", logo: "/media/2025/09/De-Verschilmakerij.png" },
+  { name: "Gemeente Rotterdam", logo: "/media/2023/02/Gemeente-Rotterdam-247x150-1.png" },
+  { name: "RVO", logo: "/media/2023/02/RVO-400x150-1.png" },
+  { name: "NXP", logo: "/media/2023/02/NXP-1-300x108-1.png" },
+  { name: "Hoogheemraadschap Delfland", logo: "/media/2025/09/Hoogheemraadschap-Delfland.png" },
+  { name: "Rijkswaterstaat", logo: "/media/2025/09/Rijkswaterstaat.png" },
+  { name: "Veenweiden Innovatiecentrum", logo: "/media/2025/09/Veenweiden-innovatie-centrum.png" },
+  { name: "Waterschap De Dommel", logo: "/media/2025/09/Waterschap-de-Dommel.png" },
+];
+
+export const productPartners: Partner[] = [
+  { name: "IRNAS", logo: "/media/2023/02/IRNAS-300x62-1.png", href: "https://www.irnas.eu/embracing-sustainability-in-product-development/" },
+  { name: "NXP", logo: "/media/2023/02/NXP-1-300x108-1.png", href: "https://www.nxp.com/company/blog/building-the-bio-iot:BL-BUILDING-THE-BIO-IOT" },
+  { name: "SODAQ", logo: "/media/2023/10/sodaq.png" },
+  { name: "Lacuna Space", logo: "/media/2023/10/Lacuna-Space.png" },
+  { name: "Wageningen University & Research", logo: "/media/2023/02/WUR-300x219-1.png" },
+  { name: "European Innovation Council", logo: "/media/2023/02/cropped-image001.png" },
+  { name: "Partner", logo: "/media/2023/02/cropped-image001-1.png" },
+  { name: "Microsoft", logo: "/media/2023/02/Microsoft-1.png" },
+  { name: "Slough Borough Council", logo: "/media/2023/02/Slough-300x150-1.jpg" },
+  { name: "NEMO Science Museum", logo: "/media/2023/02/Nemo-500x150-1.png" },
+  { name: "Gemeente Rotterdam", logo: "/media/2023/02/Gemeente-Rotterdam-247x150-1.png" },
+  { name: "Radboud Universiteit", logo: "/media/2023/02/Radboud.png" },
+  { name: "RVO", logo: "/media/2023/02/RVO-400x150-1.png" },
+  { name: "NIOO-KNAW", logo: "/media/2023/02/NIOO-304x150-1.png" },
+  { name: "Royal FloraHolland", logo: "/media/2023/06/cropped-Royal-Flora-Holland-Logo.svg.png" },
+  { name: "Nykilde", logo: "/media/2023/02/Nykilde-430x150-1.jpg" },
+  { name: "AOC Terra", logo: "/media/2023/06/cropped-Logo_AOC_FC.jpg" },
+  { name: "Universit\u00e4t Bielefeld", logo: "/media/2023/02/Bielefield-University.png" },
+  { name: "Ministerie van Binnenlandse Zaken", logo: "/media/2023/02/Binnenlandse-Zaken-426x155-1.png" },
+  { name: "Coneybeare", logo: "/media/2023/02/Coneybeare.png" },
+  { name: "Don Bosco College", logo: "/media/2023/02/Don-Bosco-college-408x150-1.png" },
+  { name: "Fontys", logo: "/media/2023/02/Fontys-297x150-1.png" },
+  { name: "Gemeente Den Haag", logo: "/media/2023/06/cropped-1200px-Compact_Logo_gemeente_Den_Haag.svg.png" },
+  { name: "Gemeente Ede", logo: "/media/2023/06/cropped-Gemeente_Ede_Logo.jpg" },
+  { name: "Gemeente Venlo", logo: "/media/2023/02/Gemeente-Venlo.png" },
+  { name: "Universiteit Gent", logo: "/media/2023/02/Gent-University-187x150-1.png" },
+  { name: "Ginkel", logo: "/media/2023/02/Ginkel-245x150-1.png" },
+  { name: "Groen Onderwijscentrum", logo: "/media/2023/02/Groen-onderwijscentrum-247x150-1.jpg" },
+  { name: "HIG", logo: "/media/2023/02/HIG.png" },
+  { name: "Kerckebosch", logo: "/media/2023/02/Kerckebosch-180x150-1.jpg" },
+  { name: "MQCD", logo: "/media/2023/02/MQCD.png" },
+  { name: "Windpark Nijmegen", logo: "/media/2023/02/Nijmegen-Windpark.png" },
+  { name: "Partner", logo: "/media/2023/06/cropped-1584217978.jpg" },
+  { name: "Neobuild", logo: "/media/2023/02/Neobuild-332x150-1.png" },
+  { name: "Partner", logo: "/media/2023/06/cropped-Screenshot-2023-06-20-114846-2.png" },
+  { name: "Randers Kommune", logo: "/media/2023/02/Randers-Kommune-254x150-1.jpg" },
+  { name: "Semper Green", logo: "/media/2023/02/Semper-Green-470x150-1.jpg" },
+  { name: "University of Oulu", logo: "/media/2023/06/University-of-Oulo.png" },
+  { name: "Upright", logo: "/media/2023/02/Upright-200x150-1.jpg" },
+  { name: "Vives", logo: "/media/2023/02/Vives-210x150-1.jpg" },
+  { name: "VLAG", logo: "/media/2023/02/VLAG-150x150-1.png" },
+  { name: "Wetsus", logo: "/media/2023/02/Wetsus-390x150-1.jpg" },
+  { name: "WIMEK", logo: "/media/2023/02/Wimek-197x150-1.jpg" },
+  { name: "Witteveen+Bos", logo: "/media/2023/02/Witteveen-en-Bos-578x150-1.jpg" },
+  { name: "Goeters", logo: "/media/2023/06/cropped-Goeters.jpg" },
+  { name: "NL Greenlabel", logo: "/media/2023/06/cropped-Logo-NL-Greenlabel-met-naam-scaled-1.jpg" },
+];
+
+export const aboutPartners: Partner[] = [
+  { name: "European Innovation Council", logo: "/media/2023/02/cropped-image001.png" },
+  { name: "Partner", logo: "/media/2023/02/cropped-image001-1.png" },
+  { name: "Wageningen University & Research", logo: "/media/2023/02/WUR-300x219-1.png" },
+  { name: "Microsoft", logo: "/media/2023/02/Microsoft-1.png" },
+  { name: "Slough Borough Council", logo: "/media/2023/02/Slough-300x150-1.jpg" },
+  { name: "NEMO Science Museum", logo: "/media/2023/02/Nemo-500x150-1.png" },
+  { name: "Gemeente Rotterdam", logo: "/media/2023/02/Gemeente-Rotterdam-247x150-1.png" },
+  { name: "Radboud Universiteit", logo: "/media/2023/02/Radboud.png" },
+  { name: "RVO", logo: "/media/2023/02/RVO-400x150-1.png" },
+  { name: "NIOO-KNAW", logo: "/media/2023/02/NIOO-304x150-1.png" },
+  { name: "Royal FloraHolland", logo: "/media/2023/02/Royal-Flora-Holland-250x150-1.jpg" },
+  { name: "Nykilde", logo: "/media/2023/02/Nykilde-430x150-1.jpg" },
+  { name: "AOC Terra", logo: "/media/2023/02/AOC.jpg" },
+  { name: "Universit\u00e4t Bielefeld", logo: "/media/2023/02/Bielefield-University.png" },
+  { name: "Ministerie van Binnenlandse Zaken", logo: "/media/2023/02/Binnenlandse-Zaken-426x155-1.png" },
+  { name: "Coneybeare", logo: "/media/2023/02/Coneybeare.png" },
+  { name: "Don Bosco College", logo: "/media/2023/02/Don-Bosco-college-408x150-1.png" },
+  { name: "Fontys", logo: "/media/2023/02/Fontys-297x150-1.png" },
+  { name: "Gemeente Den Haag", logo: "/media/2023/02/Gemeente-Den-Haag-150x144-1.png" },
+  { name: "Gemeente Ede", logo: "/media/2023/02/Gemeente-Ede-80x75-1.png" },
+  { name: "Gemeente Venlo", logo: "/media/2023/02/Gemeente-Venlo.png" },
+  { name: "Universiteit Gent", logo: "/media/2023/02/Gent-University-187x150-1.png" },
+  { name: "Ginkel", logo: "/media/2023/02/Ginkel-245x150-1.png" },
+  { name: "Groen Onderwijscentrum", logo: "/media/2023/02/Groen-onderwijscentrum-247x150-1.jpg" },
+  { name: "HIG", logo: "/media/2023/02/HIG.png" },
+  { name: "IRNAS", logo: "/media/2023/02/IRNAS-300x62-1.png" },
+  { name: "Kerckebosch", logo: "/media/2023/02/Kerckebosch-180x150-1.jpg" },
+  { name: "MQCD", logo: "/media/2023/02/MQCD.png" },
+  { name: "Windpark Nijmegen", logo: "/media/2023/02/Nijmegen-Windpark.png" },
+  { name: "Nordwin College", logo: "/media/2023/02/Nordwin-150x150-1.jpg" },
+  { name: "Neobuild", logo: "/media/2023/02/Neobuild-332x150-1.png" },
+  { name: "Nassau College", logo: "/media/2023/02/Nassau-college-245x150-1.png" },
+  { name: "NXP", logo: "/media/2023/02/NXP-1-300x108-1.png" },
+  { name: "Randers Kommune", logo: "/media/2023/02/Randers-Kommune-254x150-1.jpg" },
+  { name: "Semper Green", logo: "/media/2023/02/Semper-Green-470x150-1.jpg" },
+  { name: "University of Oulu   1", logo: "/media/2023/02/University-of-Oulu-114x150-1.jpg" },
+  { name: "Upright", logo: "/media/2023/02/Upright-200x150-1.jpg" },
+  { name: "Vives", logo: "/media/2023/02/Vives-210x150-1.jpg" },
+  { name: "VLAG", logo: "/media/2023/02/VLAG-150x150-1.png" },
+  { name: "Wetsus", logo: "/media/2023/02/Wetsus-390x150-1.jpg" },
+  { name: "WIMEK", logo: "/media/2023/02/Wimek-197x150-1.jpg" },
+  { name: "Witteveen+Bos", logo: "/media/2023/02/Witteveen-en-Bos-578x150-1.jpg" },
+];
+
 
 export const brand = {
   logo: "/media/2023/01/plant-e-logo-website.png",
   logoMark: "/media/2023/01/292443468_546496916978011_2879600344467351588_n.png",
   dashboardUrl: "https://dashboard.plant-e.com/",
+};
+
+export const newsHighlights: { image: string; title: T; post?: string }[] = [
+  { image: "/media/2023/01/cropped-Maxima-1.jpg", title: L("Koningin Máxima op bezoek bij Plant-e", "Queen Máxima visits Plant-e"), post: "koningin-maxima-bezoekt-plant-e" },
+  { image: "/media/2023/01/maxresdefault.jpg", title: L("Plant-e ontvangt prestigieuze European Innovation Council (EIC) beurs", "Plant-e receives prestigious European Innovation Council (EIC) grant"), post: "plant-e-receives-prestigious-grant-from-the-european-innovation-council-for-development-of-plant-powered-sensors" },
+  { image: "/media/2023/02/Marjolein-Helder_2.jpg", title: L("Plant-e bij het World Economic Forum", "Plant-e at the World Economic Forum") },
+  { image: "/media/2023/02/2014-03-31-16.03.39.jpg", title: L("Plant-e presenteert bij TEDx, 2014", "Plant-e presents at TEDx, 2014") },
+];
+
+export const inTheNews = {
+  title: L("In het nieuws", "In the news"),
+  intro: L(
+    "Bekijk hier Plant-e in het nieuws! Bijvoorbeeld [het bezoek van Koningin Máxima](/actueel/koningin-maxima-bezoekt-plant-e), de toekenning van de [prestigieuze EIC-beurs](/actueel/plant-e-receives-prestigious-grant-from-the-european-innovation-council-for-development-of-plant-powered-sensors) of onze aanwezigheid bij het World Economic Forum.",
+    "See Plant-e in the news! For example [the visit of Queen Máxima](/en/news/koningin-maxima-bezoekt-plant-e), the award of the [prestigious EIC grant](/en/news/plant-e-receives-prestigious-grant-from-the-european-innovation-council-for-development-of-plant-powered-sensors) or our presence at the World Economic Forum.",
+  ),
+  postsTitle: L("Nieuwsberichten", "News articles"),
+  faqText: L(
+    "We houden een uitgebreid overzicht bij van alle nieuwsberichten met en over Plant-e. Wil jij weten wat er nu speelt? Bekijk dan onze nieuwspagina!",
+    "We keep an extensive overview of all news with and about Plant-e. Want to know what is happening right now? Take a look at our news page!",
+  ),
+  faqCta: L("Naar het nieuws", "Go to the news"),
+};
+
+export const faqImage = "/media/2023/02/Plant_qm.png";
+
+export const shopImages = {
+  hero: "/media/shop/2023/04/Hand_plant-e1683143753855.jpeg",
+  custom: "/media/shop/2023/04/Lamp_plant.jpeg",
+  expo: "/media/shop/2023/04/cropped-13539173043_9d0e677e9a_o-scaled-1-1024x1024-1.jpg",
+  productHeader: "/media/shop/2023/04/Verlichting-Vrijstaande-plantenbak-Rotterdam-versie-scaled.jpg",
+  thanks: "/media/shop/2023/05/Green-heart-scaled.jpg",
+  euLogo: "/media/shop/2023/04/EU_logo.png",
+  categories: {
+    home: "/media/shop/2023/04/Box@home-plants-scaled.jpg",
+    work: "/media/shop/2023/04/Bos-1.jpeg",
+    school: "/media/shop/2023/04/Bos1273584292-cbcd5f85f4c646d58f7a7fa158dcaaeb.jpg",
+  } as Record<string, string>,
+};
+
+export const shopExtra = {
+  expoTitle: L("Presentaties & Expo's", "Presentations & Expos"),
+  expoText: L("Benieuwd naar onze technologie? We komen er graag over vertellen. Neem contact op voor de mogelijkheden.", "Curious about our technology? We would love to tell you about it. Get in touch to discuss the options."),
+  discover: L("Ontdek meer", "Discover more"),
+  viewProducts: L("Bekijk producten", "View products"),
+};
+
+export const contactMap = "https://www.google.com/maps/d/u/0/embed?mid=1xnoyRVVfAiLA9OqCXgmWfCbemZHaKCA&ehbc=2E312F";
+
+export const notFoundText = {
+  title: L("Oh, nee! Deze pagina doet het niet...", "Oh no! This page does not work..."),
+  text: L("Ga terug naar de homepagina.", "Go back to the home page."),
+  cta: L("Naar Home", "Go to home"),
+  image: "/media/2023/01/cropped-Plant-e-logo-600x230-1.png",
 };

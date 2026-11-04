@@ -48,6 +48,8 @@ const nextConfig: NextConfig = {
       r("/brochure-sensorstick-waterquality-succes", "/waterkwaliteit-sensorstick#brochure"),
       r("/waterkwaliteit_en_temperatuur-sensorstick", "/waterkwaliteit-sensorstick"),
       r("/404-2", "/"),
+      r("/en/hoe-werkt-het", "/en/technology"),
+      r("/hoe-werkt-het", "/technologie"),
       r("/no-access", "/"),
       r("/wp-admin/:p*", "/beheer"),
       r("/wp-login.php", "/beheer"),

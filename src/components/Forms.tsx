@@ -57,6 +57,8 @@ export function BrochureForm({ locale, product, pdf }: { locale: Locale; product
   if (state === "done")
     return (
       <div className="rounded-2xl bg-white p-6">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/media/2023/03/Mailing-150x150.png" alt="" className="mb-4 h-16 w-16" />
         <p className="font-semibold text-forest">{f.brochureThanks[locale]}</p>
         <a href={pdf} target="_blank" rel="noopener" className={`${button} mt-4`}>{f.downloadBrochure[locale]}</a>
       </div>

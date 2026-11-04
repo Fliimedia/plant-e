@@ -34,6 +34,7 @@ export async function metadataFor(locale: Locale, path: string[] | undefined): P
       title: meta.title, description: meta.description, siteName: "Plant-e", locale: locale === "nl" ? "nl_NL" : "en_GB",
       images: meta.image ? [{ url: meta.image }] : undefined, url: `${SITE}${alt[locale]}`,
     },
+    twitter: { card: "summary_large_image", title: meta.title, description: meta.description, images: meta.image ? [meta.image] : undefined },
     robots: noindex ? { index: false } : undefined,
   };
 }
@@ -45,7 +46,7 @@ export async function CatchAll({ locale, path }: { locale: Locale; path: string[
     <>
       <Header locale={locale} alt={alternate(m)} />
       <main id="main"><View m={m} /></main>
-      <Footer locale={locale} />
+      <Footer locale={locale} shop={["shop", "shopCategory", "product", "cart", "thanks"].includes(m.key)} />
     </>
   );
 }

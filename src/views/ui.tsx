@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { href, type Locale } from "@/lib/routes";
-import { ui, partners } from "@/content/site";
+import { ui, partners as homePartners, type Partner } from "@/content/site";
 import { t, type Post, type Product } from "@/lib/data";
 import { formatDate, formatPrice } from "@/lib/markdown";
 
@@ -28,13 +28,27 @@ export const Eyebrow = ({ children, light }: { children: React.ReactNode; light?
   </p>
 );
 
-export function PageHero({ title, intro, eyebrow }: { title: string; intro?: string; eyebrow?: string }) {
+export function PageHero({ title, intro, eyebrow, image, children }: { title: string; intro?: string; eyebrow?: string; image?: string; children?: React.ReactNode }) {
+  if (image)
+    return (
+      <section className="relative overflow-hidden bg-forest text-white">
+        <Img src={image} className="absolute inset-0 h-full w-full object-cover opacity-45" />
+        <div className="absolute inset-0 bg-gradient-to-r from-forest via-forest/80 to-forest/10" aria-hidden />
+        <Container className="relative py-16 sm:py-24">
+          {eyebrow && <Eyebrow light>{eyebrow}</Eyebrow>}
+          <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.1] sm:text-5xl">{title}</h1>
+          {intro && <p className="mt-5 max-w-3xl text-lg leading-relaxed text-white/80">{intro}</p>}
+          {children}
+        </Container>
+      </section>
+    );
   return (
     <section className="bg-mist">
       <Container className="py-14 sm:py-20">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.1] text-forest sm:text-5xl">{title}</h1>
         {intro && <p className="mt-5 max-w-3xl text-lg leading-relaxed text-stone">{intro}</p>}
+        {children}
       </Container>
     </section>
   );
@@ -86,17 +100,18 @@ export function ProductCard({ product, locale }: { product: Product; locale: Loc
   );
 }
 
-export function PartnerWall({ locale }: { locale: Locale }) {
+export function PartnerWall({ locale, list = homePartners }: { locale: Locale; list?: Partner[] }) {
   return (
     <section className="py-20">
       <Container>
         <Eyebrow>{ui.partners[locale]}</Eyebrow>
         <div className="mt-8 grid grid-cols-3 items-center gap-x-8 gap-y-10 sm:grid-cols-4 lg:grid-cols-6">
-          {partners.map((p) => (
-            <div key={p.name} className="flex h-16 items-center justify-center">
-              <Img src={p.logo} alt={p.name} className="max-h-14 w-auto max-w-full object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0" />
-            </div>
-          ))}
+          {list.map((p) => {
+            const logo = <Img src={p.logo} alt={p.name} className="max-h-14 w-auto max-w-full object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0" />;
+            return p.href
+              ? <a key={p.logo} href={p.href} target="_blank" rel="noopener noreferrer" className="flex h-16 items-center justify-center">{logo}</a>
+              : <div key={p.logo} className="flex h-16 items-center justify-center">{logo}</div>;
+          })}
         </div>
       </Container>
     </section>

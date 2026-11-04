@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { href, type Locale } from "@/lib/routes";
-import { ui, brand, contact } from "@/content/site";
+import { ui, brand, contact, shopImages } from "@/content/site";
 
-export default function Footer({ locale }: { locale: Locale }) {
+export default function Footer({ locale, shop = false }: { locale: Locale; shop?: boolean }) {
   const f = ui.footer;
   const col = "flex flex-col gap-2.5 text-[15px] text-white/75";
   const a = "transition-colors hover:text-lime";
@@ -20,6 +20,10 @@ export default function Footer({ locale }: { locale: Locale }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/media/2023/02/cropped-image001.png" alt={f.eic[locale]} className="h-10 w-auto" />
           </a>
+          {shop && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={shopImages.euLogo} alt="EU" className="ml-3 mt-6 inline-block h-14 w-auto rounded-xl bg-white p-2 align-top" />
+          )}
         </div>
         <div>
           <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-lime">{f.products[locale]}</h3>
