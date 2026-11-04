@@ -4,9 +4,9 @@ import { useState } from "react";
 import { href, type Locale } from "@/lib/routes";
 import { ui } from "@/content/site";
 
-const input = "w-full rounded-[3px] border border-line bg-white px-4 py-3 text-[15px] outline-none transition focus:border-water focus:ring-2 focus:ring-water/25";
+const input = "w-full rounded-xl border border-line bg-white px-4 py-3 text-[15px] outline-none transition focus:border-water focus:ring-2 focus:ring-water/25";
 const label = "mb-1.5 block text-sm font-medium text-forest";
-const button = "inline-flex items-center justify-center rounded-[3px] bg-forest px-6 py-3 font-medium text-white transition hover:bg-water disabled:opacity-60";
+const button = "inline-flex items-center justify-center rounded-full bg-forest px-6 py-3 font-medium text-white transition hover:bg-water disabled:opacity-60";
 
 type State = "idle" | "busy" | "done" | "error";
 
@@ -38,7 +38,7 @@ const Honeypot = () => (
 export function ContactForm({ locale }: { locale: Locale }) {
   const f = ui.forms;
   const { state, onSubmit } = useForm("contact", { locale });
-  if (state === "done") return <p className="rounded-[3px] bg-mist p-6 font-medium text-forest">{f.thanks[locale]}</p>;
+  if (state === "done") return <p className="rounded-[1.5rem] bg-mist p-6 font-medium text-forest">{f.thanks[locale]}</p>;
   return (
     <form onSubmit={onSubmit} className="relative grid gap-4">
       <Honeypot />
@@ -56,7 +56,7 @@ export function BrochureForm({ locale, product, pdf }: { locale: Locale; product
   const { state, onSubmit } = useForm("brochure", { locale, product });
   if (state === "done")
     return (
-      <div className="rounded-[3px] bg-white p-6">
+      <div className="rounded-[1.5rem] bg-white p-6">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/media/2023/03/Mailing-150x150.png" alt="" className="mb-4 h-16 w-16" />
         <p className="font-medium text-forest">{f.brochureThanks[locale]}</p>

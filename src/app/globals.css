@@ -100,3 +100,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 600; letter-
 .article-body .prose-plant .gallery { margin-top: 2em; }
 .article-body .prose-plant .gallery img { margin: 0; }
 .article-body .prose-plant hr { border: 0; height: 1px; background: var(--color-line); margin: 2.5em 0; }
+
+/* Rounded media inside article and body text. */
+.prose-plant img, .prose-plant video, .prose-plant .embed { border-radius: 1.25rem; }
+.prose-plant .gallery img { border-radius: 1rem; }

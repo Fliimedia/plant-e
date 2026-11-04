@@ -71,27 +71,27 @@ export default function Header({ locale, alt }: { locale: Locale; alt: Record<Lo
         <nav className="ml-auto hidden items-center gap-1 lg:flex" aria-label="Hoofdmenu">
           {items.map((it) => (
             <div key={it.label} className="group relative">
-              <Link href={it.to} className={`flex items-center gap-1 px-3 py-2 text-[15px] transition-colors hover:text-water ${active(it.to) ? "text-lime-dark" : "text-forest"}`}>
+              <Link href={it.to} className={`flex items-center gap-1 rounded-full px-4 py-2 text-[15px] transition-colors hover:bg-mist ${active(it.to) ? "text-lime-dark" : "text-forest"}`}>
                 {it.label}
                 {it.children && <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden className="opacity-60"><path d="M1 3l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" /></svg>}
               </Link>
               {it.children && (
                 <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                  <div className="min-w-64 border border-line bg-white py-2 shadow-lg shadow-forest/10">
+                  <div className="min-w-64 rounded-2xl border border-line bg-white p-2 shadow-lg shadow-forest/10">
                     {it.children.map((c) => (
-                      <Link key={c.to} href={c.to} className="block px-5 py-2.5 text-[15px] text-forest hover:bg-mist">{c.label}</Link>
+                      <Link key={c.to} href={c.to} className="block rounded-xl px-4 py-2.5 text-[15px] text-forest hover:bg-mist">{c.label}</Link>
                     ))}
                   </div>
                 </div>
               )}
             </div>
           ))}
-          <a href={brand.dashboardUrl} className="ml-3 rounded-[3px] border border-forest px-4 py-2 text-[15px] text-forest transition-colors hover:bg-forest hover:text-white">{n.dashboard[locale]}</a>
+          <a href={brand.dashboardUrl} className="ml-3 rounded-full border border-forest px-4 py-2 text-[15px] text-forest transition-colors hover:bg-forest hover:text-white">{n.dashboard[locale]}</a>
         </nav>
         <div className="ml-auto flex items-center gap-1 lg:ml-2">
           <div className="mr-1 flex items-center gap-1.5" role="group" aria-label="Taal / Language">
             {(["nl", "en"] as Locale[]).map((lng) => {
-              const flag = <Flag lang={lng} className={`h-[15px] w-[22px] ring-1 ring-line transition ${lng === locale ? "" : "opacity-45 grayscale hover:opacity-100 hover:grayscale-0"}`} />;
+              const flag = <Flag lang={lng} className={`h-[15px] w-[22px] rounded-[3px] ring-1 ring-line transition ${lng === locale ? "" : "opacity-45 grayscale hover:opacity-100 hover:grayscale-0"}`} />;
               return lng === locale
                 ? <span key={lng} className="p-1" aria-current="true" title={lng === "nl" ? "Nederlands" : "English"}>{flag}</span>
                 : <Link key={lng} href={alt[lng]} onClick={setLang} hrefLang={lng} className="p-1" aria-label={lng === "nl" ? "Nederlands" : "English"} title={lng === "nl" ? "Nederlands" : "English"}>{flag}</Link>;
@@ -99,7 +99,7 @@ export default function Header({ locale, alt }: { locale: Locale; alt: Record<Lo
           </div>
           <Link href={href("cart", locale)} className="relative p-2.5 text-forest hover:text-water" aria-label={ui.shop.cart[locale]}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden><path d="M6 7h12l-1 13H7L6 7z" /><path d="M9 7a3 3 0 016 0" /></svg>
-            {count > 0 && <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-[3px] bg-lime px-1 text-[11px] font-medium text-forest">{count}</span>}
+            {count > 0 && <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-lime px-1 text-[11px] font-medium text-forest">{count}</span>}
           </Link>
           <button onClick={() => setOpen(true)} className="p-2.5 text-forest lg:hidden" aria-label={n.menu[locale]} aria-expanded={open}>
             <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M4 7h16M4 12h16M4 17h16" /></svg>
@@ -127,7 +127,7 @@ export default function Header({ locale, alt }: { locale: Locale; alt: Record<Lo
                 )}
               </div>
             ))}
-            <a href={brand.dashboardUrl} className="mt-6 rounded-[3px] bg-lime px-5 py-3 text-center font-medium text-forest">{n.dashboard[locale]}</a>
+            <a href={brand.dashboardUrl} className="mt-6 rounded-full bg-lime px-5 py-3 text-center font-medium text-forest">{n.dashboard[locale]}</a>
           </nav>
         </div>
       )}
