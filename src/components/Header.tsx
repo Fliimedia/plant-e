@@ -87,7 +87,6 @@ export default function Header({ locale, alt }: { locale: Locale; alt: Record<Lo
               )}
             </div>
           ))}
-          <a href={brand.dashboardUrl} className="ml-2 rounded-full border border-forest px-4 py-2 text-[15px] font-semibold text-forest transition-colors hover:bg-forest hover:text-white">{n.dashboard[locale]}</a>
         </nav>
         <div className="ml-auto flex items-center gap-1.5 lg:ml-2">
           <div className="flex items-center rounded-full bg-mist p-1" role="group" aria-label="Taal / Language">
@@ -105,10 +104,14 @@ export default function Header({ locale, alt }: { locale: Locale; alt: Record<Lo
                 : <Link key={lng} href={alt[lng]} onClick={setLang} hrefLang={lng} className={`${cls} text-stone opacity-70 hover:opacity-100`} aria-label={name} title={name}>{inner}</Link>;
             })}
           </div>
-          <Link href={href("shop", locale)} className={`ml-1 rounded-full px-4 py-2 text-[15px] font-semibold transition-colors ${inShop ? "bg-forest text-white" : "bg-lime text-forest hover:bg-forest hover:text-white"}`}>{n.shop[locale]}</Link>
+          <a href={brand.dashboardUrl} className="ml-1 hidden rounded-full bg-forest px-4 py-2 text-[15px] font-semibold text-white transition-colors hover:bg-moss lg:inline-flex">{n.dashboard[locale]}</a>
+          <Link href={href("shop", locale)} className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[15px] font-semibold transition-colors ${inShop ? "bg-lime-dark text-white" : "bg-lime text-forest hover:bg-lime-dark hover:text-white"}`}>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M5 8h14l-1.2 11.2a2 2 0 01-2 1.8H8.2a2 2 0 01-2-1.8L5 8z" /><path d="M9 8V6.5a3 3 0 016 0V8" /></svg>
+            {n.shop[locale]}
+          </Link>
           {inShop && (
             <Link href={href("cart", locale)} className="relative rounded-full p-2.5 text-forest hover:bg-mist" aria-label={ui.shop.cart[locale]}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden><path d="M6 7h12l-1 13H7L6 7z" /><path d="M9 7a3 3 0 016 0" /></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden><circle cx="9.5" cy="19.5" r="1.4" /><circle cx="17.5" cy="19.5" r="1.4" /><path d="M2.5 3.5h2.4l2.3 10.6a1.6 1.6 0 001.6 1.3h8.1a1.6 1.6 0 001.5-1.2L20.5 7H5.6" /></svg>
               {count > 0 && <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-lime px-1 text-[11px] font-bold text-forest">{count}</span>}
             </Link>
           )}
