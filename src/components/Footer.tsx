@@ -7,7 +7,7 @@ export default function Footer({ locale, shop = false }: { locale: Locale; shop?
   const col = "flex flex-col gap-2.5 text-[15px] text-white/75";
   const a = "transition-colors hover:text-lime";
   return (
-    <footer className="mx-3 mb-3 mt-16 rounded-[2rem] bg-forest text-white sm:mx-4 sm:mb-4">
+    <footer className="mt-24 bg-forest text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -26,7 +26,7 @@ export default function Footer({ locale, shop = false }: { locale: Locale; shop?
           )}
         </div>
         <div>
-          <h3 className="mb-4 text-[15px] text-white">{f.products[locale]}</h3>
+          <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-lime">{f.products[locale]}</h3>
           <div className={col}>
             <Link className={a} href={href("technology", locale)}>{ui.nav.technology[locale]}</Link>
             <Link className={a} href={href("groundwater", locale)}>{locale === "nl" ? "Grondwaterstand SensorStick" : "Groundwater Level SensorStick"}</Link>
@@ -36,7 +36,7 @@ export default function Footer({ locale, shop = false }: { locale: Locale; shop?
           </div>
         </div>
         <div>
-          <h3 className="mb-4 text-[15px] text-white">{f.contact[locale]}</h3>
+          <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-lime">{f.contact[locale]}</h3>
           <div className={col}>
             <Link className={a} href={href("contact", locale)}>{f.form[locale]}</Link>
             <Link className={a} href={href("newsletter", locale)}>{f.newsletter[locale]}</Link>
@@ -44,7 +44,7 @@ export default function Footer({ locale, shop = false }: { locale: Locale; shop?
           </div>
         </div>
         <div>
-          <h3 className="mb-4 text-[15px] text-white">{f.about[locale]}</h3>
+          <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-lime">{f.about[locale]}</h3>
           <div className={col}>
             <Link className={a} href={href("faq", locale)}>FAQ</Link>
             <Link className={a} href={href("news", locale)}>{ui.nav.news[locale]}</Link>
@@ -63,7 +63,7 @@ export default function Footer({ locale, shop = false }: { locale: Locale; shop?
           </div>
           <div className="flex items-center gap-5">
             <span>Plant-e BV © {new Date().getFullYear()}</span>
-            <a href="https://flii.nl" target="_blank" rel="noopener noreferrer" className="flii-shine font-medium">built by flii</a>
+            <a href="https://flii.nl" target="_blank" rel="noopener noreferrer" className="flii-shine font-semibold">built by flii</a>
           </div>
         </div>
       </div>

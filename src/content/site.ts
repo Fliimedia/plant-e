@@ -673,7 +673,6 @@ export const notFoundText = {
 
 export const heroes = {
   home: { image: "/video/hero-veen-poster.jpg", video: "/video/hero-veen.mp4" as string | null },
-  technology: { image: "/img/hero-technologie.jpg", video: null as string | null },
 };
 
 /** Where each project took place, as stated in the project article. */

@@ -25,10 +25,10 @@ export default function ShareBar({ url, title, labels }: { url: string; title: s
   const copy = async () => {
     try { await navigator.clipboard.writeText(url); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch { /* clipboard unavailable */ }
   };
-  const btn = "grid h-10 w-10 place-items-center border border-line text-forest transition-colors hover:border-forest hover:bg-forest hover:text-white";
+  const btn = "grid h-10 w-10 place-items-center rounded-full border border-line text-forest transition-colors hover:border-forest hover:bg-forest hover:text-white";
   return (
     <div className="flex flex-wrap items-center gap-2" aria-label={labels.share}>
-      <span className="mr-2 text-[14px] text-stone">{labels.share}</span>
+      <span className="mr-2 text-sm font-semibold text-stone">{labels.share}</span>
       {links.map(([k, name, to]) => (
         <a key={k} href={to} target={k === "mail" ? undefined : "_blank"} rel="noopener noreferrer" className={btn} aria-label={name} title={name}>
           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>{icons[k]}</svg>
