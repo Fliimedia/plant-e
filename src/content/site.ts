@@ -647,7 +647,6 @@ export const shopImages = {
   expo: "/media/shop/2023/04/cropped-13539173043_9d0e677e9a_o-scaled-1-1024x1024-1.jpg",
   productHeader: "/media/shop/2023/04/Verlichting-Vrijstaande-plantenbak-Rotterdam-versie-scaled.jpg",
   thanks: "/media/shop/2023/05/Green-heart-scaled.jpg",
-  euLogo: "/media/shop/2023/04/EU_logo.png",
   categories: {
     home: "/media/shop/2023/04/Box@home-plants-scaled.jpg",
     work: "/media/shop/2023/04/Bos-1.jpeg",

@@ -8,9 +8,9 @@ import { useCart } from "./Cart";
 
 function Flag({ lang, className }: { lang: Locale; className?: string }) {
   return lang === "nl" ? (
-    <svg viewBox="0 0 9 6" className={className} aria-hidden><rect width="9" height="6" fill="#21468B" /><rect width="9" height="4" fill="#fff" /><rect width="9" height="2" fill="#AE1C28" /></svg>
+    <svg viewBox="0 0 9 6" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden><rect width="9" height="6" fill="#21468B" /><rect width="9" height="4" fill="#fff" /><rect width="9" height="2" fill="#AE1C28" /></svg>
   ) : (
-    <svg viewBox="0 0 60 30" className={className} aria-hidden>
+    <svg viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden>
       <clipPath id="uk-s"><path d="M0,0 v30 h60 v-30 z" /></clipPath>
       <clipPath id="uk-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" /></clipPath>
       <g clipPath="url(#uk-s)">
@@ -58,6 +58,7 @@ export default function Header({ locale, alt }: { locale: Locale; alt: Record<Lo
   ];
   const other: Locale = locale === "nl" ? "en" : "nl";
   const setLang = () => { document.cookie = `lang=${other}; path=/; max-age=31536000; samesite=lax`; };
+  const inShop = pathname === "/shop" || pathname.startsWith("/shop/") || pathname === "/en/shop" || pathname.startsWith("/en/shop/");
   const active = (to: string) => pathname === to || (to !== "/" && to !== "/en" && pathname.startsWith(to + "/"));
 
   return (
@@ -69,7 +70,7 @@ export default function Header({ locale, alt }: { locale: Locale; alt: Record<Lo
           <img src={brand.logo} alt="Plant-e" className="h-8 w-auto lg:h-10" />
         </Link>
         <nav className="ml-auto hidden items-center gap-1 lg:flex" aria-label="Hoofdmenu">
-          {items.map((it) => (
+          {items.filter((it) => it.to !== href("shop", locale)).map((it) => (
             <div key={it.label} className="group relative">
               <Link href={it.to} className={`flex items-center gap-1 rounded-full px-4 py-2 text-[15px] font-semibold transition-colors hover:bg-mist ${active(it.to) ? "text-lime-dark" : "text-forest"}`}>
                 {it.label}
@@ -88,19 +89,29 @@ export default function Header({ locale, alt }: { locale: Locale; alt: Record<Lo
           ))}
           <a href={brand.dashboardUrl} className="ml-2 rounded-full border border-forest px-4 py-2 text-[15px] font-semibold text-forest transition-colors hover:bg-forest hover:text-white">{n.dashboard[locale]}</a>
         </nav>
-        <div className="ml-auto flex items-center gap-1 lg:ml-2">
-          <div className="mr-1 flex items-center gap-1" role="group" aria-label="Taal / Language">
+        <div className="ml-auto flex items-center gap-1.5 lg:ml-2">
+          <div className="flex items-center rounded-full bg-mist p-1" role="group" aria-label="Taal / Language">
             {(["nl", "en"] as Locale[]).map((lng) => {
-              const flag = <Flag lang={lng} className={`h-[16px] w-[24px] rounded-[4px] ring-1 ring-line transition ${lng === locale ? "" : "opacity-45 grayscale hover:opacity-100 hover:grayscale-0"}`} />;
+              const name = lng === "nl" ? "Nederlands" : "English";
+              const inner = (
+                <>
+                  <span className="block h-[18px] w-[18px] overflow-hidden rounded-full ring-1 ring-black/10"><Flag lang={lng} className="h-full w-full" /></span>
+                  <span className="hidden text-xs font-bold uppercase tracking-wide sm:inline">{lng}</span>
+                </>
+              );
+              const cls = "flex items-center gap-1.5 rounded-full px-2 py-1 transition sm:px-2.5";
               return lng === locale
-                ? <span key={lng} className="rounded-full p-1.5" aria-current="true" title={lng === "nl" ? "Nederlands" : "English"}>{flag}</span>
-                : <Link key={lng} href={alt[lng]} onClick={setLang} hrefLang={lng} className="rounded-full p-1.5 hover:bg-mist" aria-label={lng === "nl" ? "Nederlands" : "English"} title={lng === "nl" ? "Nederlands" : "English"}>{flag}</Link>;
+                ? <span key={lng} className={`${cls} bg-white text-forest shadow-sm`} aria-current="true" title={name}>{inner}</span>
+                : <Link key={lng} href={alt[lng]} onClick={setLang} hrefLang={lng} className={`${cls} text-stone opacity-70 hover:opacity-100`} aria-label={name} title={name}>{inner}</Link>;
             })}
           </div>
-          <Link href={href("cart", locale)} className="relative rounded-full p-2.5 text-forest hover:bg-mist" aria-label={ui.shop.cart[locale]}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden><path d="M6 7h12l-1 13H7L6 7z" /><path d="M9 7a3 3 0 016 0" /></svg>
-            {count > 0 && <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-lime px-1 text-[11px] font-bold text-forest">{count}</span>}
-          </Link>
+          <Link href={href("shop", locale)} className={`ml-1 rounded-full px-4 py-2 text-[15px] font-semibold transition-colors ${inShop ? "bg-forest text-white" : "bg-lime text-forest hover:bg-forest hover:text-white"}`}>{n.shop[locale]}</Link>
+          {inShop && (
+            <Link href={href("cart", locale)} className="relative rounded-full p-2.5 text-forest hover:bg-mist" aria-label={ui.shop.cart[locale]}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden><path d="M6 7h12l-1 13H7L6 7z" /><path d="M9 7a3 3 0 016 0" /></svg>
+              {count > 0 && <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-lime px-1 text-[11px] font-bold text-forest">{count}</span>}
+            </Link>
+          )}
           <button onClick={() => setOpen(true)} className="rounded-full p-2.5 text-forest hover:bg-mist lg:hidden" aria-label={n.menu[locale]} aria-expanded={open}>
             <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M4 7h16M4 12h16M4 17h16" /></svg>
           </button>
