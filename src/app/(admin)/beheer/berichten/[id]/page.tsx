@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { requireAdmin, Shell, Card, Field, Check, Notice, btn, btnGhost, L10nHelp } from "../../ui";
 import { savePost, deleteRow } from "../../actions";
 import Uploader from "../../Uploader";
+import { authors } from "@/content/site";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,12 @@ export default async function EditPost({ params, searchParams }: { params: Promi
             <label className="mb-1 block text-sm font-semibold text-forest" htmlFor="kind">Soort</label>
             <select id="kind" name="kind" defaultValue={p?.kind ?? "news"} className="w-full rounded-xl border border-line bg-white px-3 py-2.5">
               <option value="news">Nieuws</option><option value="project">Project</option>
+            </select>
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-semibold text-forest" htmlFor="author">Auteur</label>
+            <select id="author" name="author" defaultValue={p?.author ?? "plant-e"} className="w-full rounded-xl border border-line bg-white px-3 py-2.5">
+              {Object.entries(authors).map(([k, a]) => <option key={k} value={k}>{a.name}</option>)}
             </select>
           </div>
           <Field label="Datum" name="date" type="date" defaultValue={p?.date ?? new Date().toISOString().slice(0, 10)} />

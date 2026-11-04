@@ -45,11 +45,11 @@ export default function CookieBanner() {
         </>
       )}
       {show && (
-        <div className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-xl rounded-2xl border border-line bg-white p-5 shadow-2xl shadow-forest/15 sm:inset-x-6 sm:bottom-6" role="dialog" aria-label="Cookies">
+        <div className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-xl rounded-[3px] border border-line bg-white p-5 shadow-2xl shadow-forest/15 sm:inset-x-6 sm:bottom-6" role="dialog" aria-label="Cookies">
           <p className="text-sm leading-relaxed text-stone">{c.text[locale]} <Link href={href("cookies", locale)} className="underline">{c.more[locale]}</Link></p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <button onClick={() => choose(true)} className="rounded-full bg-forest px-5 py-2.5 text-sm font-bold text-white hover:bg-moss">{c.accept[locale]}</button>
-            <button onClick={() => choose(false)} className="rounded-full border border-line px-5 py-2.5 text-sm font-bold text-forest hover:bg-mist">{c.decline[locale]}</button>
+            <button onClick={() => choose(true)} className="rounded-[3px] bg-forest px-5 py-2.5 text-sm font-medium text-white hover:bg-water">{c.accept[locale]}</button>
+            <button onClick={() => choose(false)} className="rounded-[3px] border border-line px-5 py-2.5 text-sm font-medium text-forest hover:bg-mist">{c.decline[locale]}</button>
           </div>
         </div>
       )}

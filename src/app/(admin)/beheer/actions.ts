@@ -56,6 +56,7 @@ export async function savePost(f: FormData) {
     slug, kind: s(f, "kind") === "project" ? "project" : "news", is_news: f.get("is_news") === "on",
     date: s(f, "date") || new Date().toISOString().slice(0, 10), image: s(f, "image") || null,
     tags: lines(s(f, "tags")), lang: s(f, "title_nl") ? "nl" : "en", published: f.get("published") === "on",
+    author: s(f, "author") || "plant-e",
     title: { nl: s(f, "title_nl") || undefined, en: s(f, "title_en") || undefined },
     excerpt: { nl: s(f, "excerpt_nl") || undefined, en: s(f, "excerpt_en") || undefined },
     body: { nl: s(f, "body_nl") || undefined, en: s(f, "body_en") || undefined },
@@ -130,7 +131,7 @@ export async function importSeed() {
   const sb = await guard();
   const posts = (seedPosts as Record<string, unknown>[]).map((p) => ({
     slug: p.slug, kind: p.kind, is_news: p.isNews, date: p.date, image: p.image, tags: p.tags, lang: p.lang,
-    title: p.title, excerpt: p.excerpt, body: p.body, published: true,
+    title: p.title, excerpt: p.excerpt, body: p.body, published: true, author: p.author ?? "plant-e",
   }));
   const products = (seedProducts as Record<string, unknown>[]).map((p, i) => ({
     slug: p.slug, title: p.title, short: p.short, body: p.body, price_cents: p.priceCents, categories: p.categories,

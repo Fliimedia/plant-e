@@ -10,7 +10,7 @@ export type L10n = Partial<Record<Locale, string>>;
 
 export type Post = {
   slug: string; date: string; kind: "news" | "project"; isNews: boolean; tags: string[];
-  image: string | null; lang: Locale; title: L10n; excerpt: L10n; body: L10n; published: boolean;
+  image: string | null; lang: Locale; title: L10n; excerpt: L10n; body: L10n; published: boolean; author?: string;
 };
 export type Product = {
   slug: string; title: L10n; short: L10n; body: L10n; priceCents: number; categories: string[];
@@ -44,7 +44,7 @@ const loadPosts = unstable_cache(async (): Promise<Post[]> => {
   if (error || !data) return seedPosts as Post[];
   return data.map((r) => ({
     slug: r.slug, date: r.date, kind: r.kind, isNews: r.is_news, tags: r.tags ?? [], image: r.image,
-    lang: r.lang, title: r.title, excerpt: r.excerpt, body: r.body, published: r.published,
+    lang: r.lang, title: r.title, excerpt: r.excerpt, body: r.body, published: r.published, author: r.author ?? "plant-e",
   }));
 }, ["posts"], { tags: [TAG], revalidate: 300 });
 
@@ -103,3 +103,8 @@ export function getLegal(key: LegalKey) {
 }
 
 export const CONTENT_TAG = TAG;
+
+export function readMinutes(md: string): number {
+  const words = (md ?? "").replace(/!\[[^\]]*\]\([^)]*\)|<[^>]+>|https?:\/\/\S+/g, " ").split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 200));
+}

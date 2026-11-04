@@ -670,3 +670,69 @@ export const notFoundText = {
   cta: L("Naar Home", "Go to home"),
   image: "/media/2023/01/cropped-Plant-e-logo-600x230-1.png",
 };
+
+export const heroes = {
+  home: { image: "/video/hero-veen-poster.jpg", video: "/video/hero-veen.mp4" as string | null },
+  technology: { image: "/video/hero-technologie-poster.jpg", video: "/video/hero-technologie.mp4" as string | null },
+};
+
+/** Where each project took place, as stated in the project article. */
+export const projectLocations: Record<string, { place: string; lat: number; lng: number }> = {
+  "kerckebosch-zeist-wifi-punt": { place: "Zeist", lat: 52.089, lng: 5.233 },
+  "project-de-daktuin-wageningen": { place: "Wageningen", lat: 51.97, lng: 5.665 },
+  "de-natte-natuurtuin-wageningen": { place: "Wageningen", lat: 51.985, lng: 5.67 },
+  "bloompark-1-0": { place: "Slough", lat: 51.51, lng: -0.595 },
+  "het-park-van-morgen-2": { place: "Rotterdam", lat: 51.92, lng: 4.48 },
+  "voedselpark-den-haag": { place: "Den Haag", lat: 52.07, lng: 4.3 },
+  "slimme-boombakken": { place: "Renkum", lat: 51.977, lng: 5.733 },
+  "validation-of-groundwater-measurements-in-rural-areas-waterschap-de-dommel": { place: "Waterschap De Dommel", lat: 51.59, lng: 5.33 },
+  "verschillende-materialen-in-verschillende-condities-hoogheemraadschap-delfland": { place: "Delfland", lat: 52.01, lng: 4.36 },
+  "validation-of-remote-sensing-groundwater-level-for-nature-conservation-sumatra-indonesia": { place: "Sumatra", lat: -0.59, lng: 101.34 },
+  "north-pennines-soil-moisture-stick": { place: "North Pennines", lat: 54.75, lng: -2.2 },
+  "plant-e-brings-plant-powered-sensors-to-liffey-head-bog-to-strengthen-water-management": { place: "Liffey Head Bog", lat: 53.15, lng: -6.32 },
+  "natural-england-and-plant-e-partner-to-reimagine-peatland-futures": { place: "Bolton Fell Moss en Wedholme Flow", lat: 54.93, lng: -3.0 },
+  "plant-es-sensorsticks-installed-in-cairngorms-national-park-to-boost-peatland-restoration": { place: "Cairngorms", lat: 57.08, lng: -3.67 },
+  "sfeerverlichting-aan-de-oever-randers-denmark": { place: "Randers", lat: 56.46, lng: 10.04 },
+  "successful-installation-with-fermanagh-omagh-district-council": { place: "Blacklion", lat: 54.29, lng: -7.88 },
+};
+
+export const mapText = {
+  title: L("Waar SensorSticks en Plant-e systemen staan", "Where SensorSticks and Plant-e systems are installed"),
+  outside: L("Buiten Europa", "Outside Europe"),
+};
+
+export const keyFigures: Record<"groundwater" | "soil" | "waterquality", { value: T; label: T }[]> = {
+  groundwater: [
+    { value: L("± 1 cm"), label: L("Precisie waterstand", "Water level precision") },
+    { value: L("> 50 jaar", "> 50 years"), label: L("Levensduur stroombron", "Power source lifetime") },
+    { value: L("Satelliet", "Satellite"), label: L("Datatransmissie, ook zonder netwerk", "Data transmission, also without a network") },
+    { value: L("24 uur", "24 hours"), label: L("Transmissiefrequentie", "Transmission frequency") },
+  ],
+  soil: [
+    { value: L("± 0,05 m³/m³", "± 0.05 m³/m³"), label: L("Precisie bodemvocht", "Soil moisture precision") },
+    { value: L("> 50 jaar", "> 50 years"), label: L("Levensduur stroombron", "Power source lifetime") },
+    { value: L("LoRa"), label: L("Data naar dashboard en app", "Data to dashboard and app") },
+    { value: L("Per uur", "Hourly"), label: L("Meetfrequentie", "Measurement frequency") },
+  ],
+  waterquality: [
+    { value: L("± 5%"), label: L("Precisie EC (0-23 dS/m)", "EC precision (0-23 dS/m)") },
+    { value: L("> 50 jaar", "> 50 years"), label: L("Levensduur stroombron", "Power source lifetime") },
+    { value: L("LoRa"), label: L("Data naar online dashboard", "Data to online dashboard") },
+    { value: L("Per uur", "Hourly"), label: L("Meetfrequentie", "Measurement frequency") },
+  ],
+};
+
+export type Author = { name: string; role: T; avatar?: string; initials?: string; linkedin?: string };
+export const authors: Record<string, Author> = {
+  "plant-e": { name: "Plant-e", role: L("Plant-e B.V., Renkum"), avatar: "/media/2023/01/292443468_546496916978011_2879600344467351588_n.png", linkedin: "https://www.linkedin.com/company/plant-e/" },
+  "sharon-polman": { name: "Sharon Polman", role: L("Business Development, Plant-e"), initials: "SP", linkedin: "https://www.linkedin.com/in/sharon-polman-57543495/" },
+};
+
+export const articleText = {
+  by: L("Door", "By"),
+  readTime: L("min leestijd", "min read"),
+  share: L("Delen", "Share"),
+  copy: L("Link kopiëren", "Copy link"),
+  copied: L("Link gekopieerd", "Link copied"),
+  email: L("E-mail", "Email"),
+};

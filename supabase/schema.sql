@@ -16,6 +16,7 @@ create table if not exists posts (
   excerpt jsonb not null default '{}',
   body jsonb not null default '{}',
   published boolean not null default true,
+  author text not null default 'plant-e',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
