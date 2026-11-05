@@ -6,7 +6,7 @@ import { authClient, currentAdmin, serviceClient, adminEmails } from "@/lib/supa
 import { BUCKET, migrateOne } from "@/lib/media";
 import { CONTENT_TAG } from "@/lib/data";
 import { importSeed as importSeedRows } from "@/lib/seed";
-import { sendMail } from "@/lib/mail";
+import { sendMail, mailConfigured } from "@/lib/mail";
 
 async function guard() {
   const email = await currentAdmin();
@@ -26,7 +26,7 @@ export async function sendLoginLink(_: unknown, f: FormData) {
   if (!sb || !admin) return { msg: "Supabase is nog niet ingesteld." };
   const h = await headers();
   const origin = `https://${h.get("host")}`;
-  if (process.env.RESEND_API_KEY) {
+  if (mailConfigured()) {
     // Our own e-mail: works for any address and needs no redirect settings in Supabase.
     await admin.auth.admin.createUser({ email, email_confirm: true }).catch(() => null);
     const { data } = await admin.auth.admin.generateLink({ type: "magiclink", email });

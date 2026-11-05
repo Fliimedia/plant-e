@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendMail } from "@/lib/mail";
+import { sendMail, mailConfigured } from "@/lib/mail";
 import { createHash } from "node:crypto";
 import { serviceClient } from "@/lib/supabase";
 
@@ -69,6 +69,6 @@ export async function POST(req: Request) {
   }
   const lines = Object.entries(lead).filter(([, v]) => v !== null && v !== "").map(([k, v]) => `${k}: ${v}`).join("\n");
   await notify(type === "contact" ? `Nieuw contactbericht van ${lead.name ?? email}` : `Brochure aangevraagd: ${lead.product}`, lines, email);
-  if (!sb && !process.env.RESEND_API_KEY) return NextResponse.json({ error: "unavailable" }, { status: 503 });
+  if (!sb && !mailConfigured()) return NextResponse.json({ error: "unavailable" }, { status: 503 });
   return NextResponse.json({ ok: true });
 }
