@@ -5,6 +5,7 @@ import seedProducts from "../../data/products.json";
 import seedLegal from "../../data/legal.json";
 import type { Locale } from "./routes";
 import { serviceClient } from "./supabase";
+import { ensureSeeded } from "./seed";
 
 export type L10n = Partial<Record<Locale, string>>;
 
@@ -40,6 +41,7 @@ const TAG = "content";
 const loadPosts = unstable_cache(async (): Promise<Post[]> => {
   const sb = serviceClient();
   if (!sb) return seedPosts as Post[];
+  await ensureSeeded(sb);
   const { data, error } = await sb.from("posts").select("*").eq("published", true).order("date", { ascending: false });
   if (error || !data) return seedPosts as Post[];
   return data.map((r) => ({
@@ -51,6 +53,7 @@ const loadPosts = unstable_cache(async (): Promise<Post[]> => {
 const loadProducts = unstable_cache(async (): Promise<Product[]> => {
   const sb = serviceClient();
   if (!sb) return seedProducts as Product[];
+  await ensureSeeded(sb);
   const { data, error } = await sb.from("products").select("*").order("sort", { ascending: true });
   if (error || !data) return seedProducts as Product[];
   return data.map((r) => ({

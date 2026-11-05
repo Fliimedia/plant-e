@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendMail } from "@/lib/mail";
 import { createHash } from "node:crypto";
 import { serviceClient } from "@/lib/supabase";
 
@@ -27,13 +28,8 @@ async function mailchimp(email: string, locale: string) {
 }
 
 async function notify(subject: string, text: string, replyTo?: string) {
-  const key = process.env.RESEND_API_KEY, to = process.env.NOTIFY_EMAIL;
-  if (!key || !to) return;
-  await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
-    body: JSON.stringify({ from: process.env.MAIL_FROM ?? "Plant-e website <website@plant-e.com>", to: to.split(","), subject, text, reply_to: replyTo }),
-  }).catch(() => {});
+  const to = process.env.NOTIFY_EMAIL;
+  if (to) await sendMail({ to: to.split(",").map((x) => x.trim()), subject, text, replyTo });
 }
 
 export async function POST(req: Request) {

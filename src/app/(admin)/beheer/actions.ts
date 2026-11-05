@@ -5,8 +5,8 @@ import { headers } from "next/headers";
 import { authClient, currentAdmin, serviceClient, adminEmails } from "@/lib/supabase";
 import { BUCKET, migrateOne } from "@/lib/media";
 import { CONTENT_TAG } from "@/lib/data";
-import seedPosts from "../../../../data/posts.json";
-import seedProducts from "../../../../data/products.json";
+import { importSeed as importSeedRows } from "@/lib/seed";
+import { sendMail } from "@/lib/mail";
 
 async function guard() {
   const email = await currentAdmin();
@@ -22,10 +22,26 @@ export async function sendLoginLink(_: unknown, f: FormData) {
   const email = s(f, "email").toLowerCase();
   if (!adminEmails().includes(email)) return { msg: "Als dit adres toegang heeft, ontvang je een inloglink per e-mail." };
   const sb = await authClient();
-  if (!sb) return { msg: "Supabase is nog niet ingesteld." };
+  const admin = serviceClient();
+  if (!sb || !admin) return { msg: "Supabase is nog niet ingesteld." };
   const h = await headers();
-  const origin = process.env.NEXT_PUBLIC_SITE_URL ?? `https://${h.get("host")}`;
-  await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: `${origin}/beheer/auth`, shouldCreateUser: true } });
+  const origin = `https://${h.get("host")}`;
+  if (process.env.RESEND_API_KEY) {
+    // Our own e-mail: works for any address and needs no redirect settings in Supabase.
+    await admin.auth.admin.createUser({ email, email_confirm: true }).catch(() => null);
+    const { data } = await admin.auth.admin.generateLink({ type: "magiclink", email });
+    const token = data?.properties?.hashed_token;
+    if (token) {
+      const link = `${origin}/beheer/auth?token_hash=${encodeURIComponent(token)}&type=magiclink`;
+      await sendMail({
+        to: email,
+        subject: "Inloggen op Plant-e beheer",
+        text: `Klik op deze link om in te loggen op het beheer van plant-e.com:\n\n${link}\n\nDe link werkt één keer en verloopt na een uur. Heb je niet om deze link gevraagd? Dan kun je deze e-mail negeren.`,
+      });
+    }
+  } else {
+    await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: `${origin}/beheer/auth`, shouldCreateUser: true } });
+  }
   return { msg: "Als dit adres toegang heeft, ontvang je een inloglink per e-mail." };
 }
 
@@ -129,16 +145,7 @@ export async function setOrderStatus(f: FormData) {
 /** One-time import of the WordPress content into the database. Skips slugs that already exist. */
 export async function importSeed() {
   const sb = await guard();
-  const posts = (seedPosts as Record<string, unknown>[]).map((p) => ({
-    slug: p.slug, kind: p.kind, is_news: p.isNews, date: p.date, image: p.image, tags: p.tags, lang: p.lang,
-    title: p.title, excerpt: p.excerpt, body: p.body, published: true, author: p.author ?? "plant-e",
-  }));
-  const products = (seedProducts as Record<string, unknown>[]).map((p, i) => ({
-    slug: p.slug, title: p.title, short: p.short, body: p.body, price_cents: p.priceCents, categories: p.categories,
-    images: p.images, stock: p.stock, pickup_only: p.pickupOnly, active: p.active, sort: i,
-  }));
-  await sb.from("posts").upsert(posts, { onConflict: "slug", ignoreDuplicates: true });
-  await sb.from("products").upsert(products, { onConflict: "slug", ignoreDuplicates: true });
+  await importSeedRows(sb);
   revalidateTag(CONTENT_TAG);
   redirect("/beheer/instellingen?import=1");
 }
