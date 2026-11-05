@@ -2,7 +2,7 @@
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import { authClient, currentAdmin, serviceClient, adminEmails } from "@/lib/supabase";
+import { authClient, currentAdmin, serviceClient, isAdmin, canUseMagicLink } from "@/lib/supabase";
 import { BUCKET, migrateOne } from "@/lib/media";
 import { CONTENT_TAG } from "@/lib/data";
 import { importSeed as importSeedRows } from "@/lib/seed";
@@ -18,9 +18,21 @@ const s = (f: FormData, k: string) => String(f.get(k) ?? "").trim();
 const slugify = (v: string) => v.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 120);
 const lines = (v: string) => v.split(/\r?\n|,/).map((x) => x.trim()).filter(Boolean);
 
+export async function loginWithPassword(_: unknown, f: FormData) {
+  const email = s(f, "email").toLowerCase();
+  const password = String(f.get("password") ?? "");
+  const wrong = { msg: "Onjuist e-mailadres of wachtwoord." };
+  if (!email || !password || !isAdmin(email)) return wrong;
+  const sb = await authClient();
+  if (!sb || !serviceClient()) return { msg: "Supabase is nog niet ingesteld." };
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  if (error) return wrong;
+  redirect("/beheer");
+}
+
 export async function sendLoginLink(_: unknown, f: FormData) {
   const email = s(f, "email").toLowerCase();
-  if (!adminEmails().includes(email)) return { msg: "Als dit adres toegang heeft, ontvang je een inloglink per e-mail." };
+  if (!canUseMagicLink(email)) return { msg: "Als dit adres toegang heeft, ontvang je een inloglink per e-mail." };
   const sb = await authClient();
   const admin = serviceClient();
   if (!sb || !admin) return { msg: "Supabase is nog niet ingesteld." };

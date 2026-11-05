@@ -31,9 +31,15 @@ export async function authClient() {
   });
 }
 
-export function adminEmails(): string[] {
-  return (process.env.ADMIN_EMAILS ?? "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
-}
+const list = (v: string | undefined) => (v ?? "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
+
+/** Individually allowed admin addresses (password login). */
+export const adminEmails = () => list(process.env.ADMIN_EMAILS);
+/** Domains whose addresses may log in with a link by e-mail (and are admin). */
+export const magicLinkDomains = () => list(process.env.ADMIN_DOMAINS ?? "plant-e.com");
+
+export const canUseMagicLink = (email: string) => magicLinkDomains().some((d) => email.toLowerCase().endsWith(`@${d}`));
+export const isAdmin = (email: string) => adminEmails().includes(email.toLowerCase()) || canUseMagicLink(email);
 
 /** Returns the logged-in admin email, or null when not allowed. */
 export async function currentAdmin(): Promise<string | null> {
@@ -41,7 +47,7 @@ export async function currentAdmin(): Promise<string | null> {
   if (!sb) return null;
   const { data } = await sb.auth.getUser();
   const email = data.user?.email?.toLowerCase();
-  if (!email || !adminEmails().includes(email)) return null;
+  if (!email || !isAdmin(email)) return null;
   return email;
 }
 
