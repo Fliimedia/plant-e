@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { track } from "@/lib/analytics";
 
 type Labels = { share: string; copy: string; copied: string; email: string };
 
@@ -22,7 +23,9 @@ export default function ShareBar({ url, title, labels }: { url: string; title: s
     ["whatsapp", "WhatsApp", `https://wa.me/?text=${tt}%20${u}`],
     ["mail", labels.email, `mailto:?subject=${tt}&body=${u}`],
   ];
+  const shared = (method: string) => track("share", { method, content_type: "article", item_id: url.replace(/^https?:\/\/[^/]+/, "") });
   const copy = async () => {
+    shared("copy_link");
     try { await navigator.clipboard.writeText(url); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch { /* clipboard unavailable */ }
   };
   const btn = "grid h-10 w-10 place-items-center rounded-full border border-line text-forest transition-colors hover:border-forest hover:bg-forest hover:text-white";
@@ -30,7 +33,7 @@ export default function ShareBar({ url, title, labels }: { url: string; title: s
     <div className="flex flex-wrap items-center gap-2" aria-label={labels.share}>
       <span className="mr-2 text-sm font-semibold text-stone">{labels.share}</span>
       {links.map(([k, name, to]) => (
-        <a key={k} href={to} target={k === "mail" ? undefined : "_blank"} rel="noopener noreferrer" className={btn} aria-label={name} title={name}>
+        <a key={k} href={to} target={k === "mail" ? undefined : "_blank"} rel="noopener noreferrer" onClick={() => shared(k)} className={btn} aria-label={name} title={name}>
           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>{icons[k]}</svg>
         </a>
       ))}

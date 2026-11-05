@@ -14,6 +14,8 @@ import { ContactForm, BrochureForm, NewsletterForm } from "@/components/Forms";
 import { AddToCart, CartView, ClearCart, type CartProduct } from "@/components/ShopClient";
 import ShareBar from "@/components/ShareBar";
 import ProductGallery from "@/components/ProductGallery";
+import { TrackEvent } from "@/components/Analytics";
+import { gaItem } from "@/lib/analytics";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://plant-e.com";
 
@@ -571,6 +573,10 @@ async function Shop({ l, cat }: { l: Locale; cat?: ShopCategory }) {
   const cats = Object.keys(shopCategoryText) as ShopCategory[];
   return (
     <>
+      <TrackEvent name="view_item_list" params={{
+        item_list_id: cat ?? "all", item_list_name: cat ? shopCategoryText[cat].title.nl : "Alle producten",
+        items: products.map((p, i) => ({ ...gaItem(p.slug, t(p.title, "nl"), p.priceCents, 1, p.categories[0]), index: i })),
+      }} />
       <PageHero eyebrow={s.title[l]} title={cat ? shopCategoryText[cat].title[l] : s.all[l]} intro={cat ? shopCategoryText[cat].text[l] : s.intro[l]} image={shopImages.hero} />
       <Container className="py-10">
         <div className="flex flex-wrap gap-2">
@@ -634,8 +640,10 @@ async function ProductPage({ l, slug }: { l: Locale; slug: string }) {
   const s = ui.shop;
   const stock = p.stock === "in_stock" ? s.inStock : p.stock === "backorder" ? s.backorder : s.outOfStock;
   const lang = shownLang(p.body, l);
+  const item = gaItem(p.slug, t(p.title, "nl"), p.priceCents, 1, p.categories[0]);
   return (
     <>
+    <TrackEvent name="view_item" params={{ currency: "EUR", value: item.price, items: [item] }} />
     <div className="relative h-40 overflow-hidden bg-forest sm:h-56">
       <Img src={shopImages.productHeader} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70" />
     </div>
@@ -651,7 +659,7 @@ async function ProductPage({ l, slug }: { l: Locale; slug: string }) {
           <div className="mt-8">
             {p.stock === "out_of_stock"
               ? <Btn to={href("contact", l)} variant="outline">{s.contactForStock[l]}</Btn>
-              : <AddToCart slug={p.slug} locale={l} />}
+              : <AddToCart slug={p.slug} locale={l} item={item} />}
           </div>
           {t(p.body, l) && <div className="mt-10 border-t border-line pt-8"><Prose md={t(p.body, l)} lang={lang} /></div>}
           <p className="mt-8 text-sm text-stone"><Link href={href("shipping", l)} className="underline">{ui.footer.shipping[l]}</Link></p>

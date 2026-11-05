@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { href, type Locale } from "@/lib/routes";
 import { ui } from "@/content/site";
+import { track } from "@/lib/analytics";
 
 const input = "w-full rounded-xl border border-line bg-white px-4 py-3 text-[15px] outline-none transition focus:border-lime-dark focus:ring-2 focus:ring-lime/40";
 const label = "mb-1.5 block text-sm font-semibold text-forest";
@@ -26,6 +27,8 @@ function useForm(type: string, extra: Record<string, string> = {}) {
     try {
       await post({ type, ...extra, ...data, elapsed: Date.now() - started });
       setState("done");
+      if (type === "newsletter") track("newsletter_signup", { form_type: type });
+      else track("generate_lead", { lead_type: type, ...(extra.product ? { product: extra.product } : {}) });
     } catch { setState("error"); }
   };
   return { state, onSubmit };
