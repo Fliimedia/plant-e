@@ -3,9 +3,8 @@ import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { authClient, currentAdmin, serviceClient, isAdmin, canUseMagicLink } from "@/lib/supabase";
-import { BUCKET, migrateOne } from "@/lib/media";
+import { BUCKET } from "@/lib/media";
 import { CONTENT_TAG } from "@/lib/data";
-import { importSeed as importSeedRows } from "@/lib/seed";
 import { sendMail, mailConfigured } from "@/lib/mail";
 
 async function guard() {
@@ -154,23 +153,4 @@ export async function setOrderStatus(f: FormData) {
   redirect("/beheer/bestellingen");
 }
 
-/** One-time import of the WordPress content into the database. Skips slugs that already exist. */
-export async function importSeed() {
-  const sb = await guard();
-  await importSeedRows(sb);
-  revalidateTag(CONTENT_TAG);
-  redirect("/beheer/instellingen?import=1");
-}
 
-/** Copies a batch of old WordPress files into storage. Call repeatedly until done. */
-export async function migrateMedia(paths: string[]): Promise<{ ok: number; failed: string[] }> {
-  const sb = await guard();
-  let ok = 0; const failed: string[] = [];
-  for (const p of paths.slice(0, 15)) {
-    const { data } = await sb.storage.from(BUCKET).list(p.split("/").slice(0, -1).join("/"), { search: p.split("/").pop() });
-    if (data?.some((x) => x.name === p.split("/").pop())) { ok++; continue; }
-    const r = await migrateOne(p).catch(() => ({ ok: false }));
-    if (r.ok) ok++; else failed.push(p);
-  }
-  return { ok, failed };
-}
