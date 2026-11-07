@@ -89,22 +89,9 @@ export default function Header({ locale, alt }: { locale: Locale; alt: Record<Lo
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-1.5 lg:ml-2">
-          <div className="flex items-center rounded-full bg-mist p-1" role="group" aria-label="Taal / Language">
-            {(["nl", "en"] as Locale[]).map((lng) => {
-              const name = lng === "nl" ? "Nederlands" : "English";
-              const inner = (
-                <>
-                  <span className="block h-[18px] w-[18px] overflow-hidden rounded-full ring-1 ring-black/10"><Flag lang={lng} className="h-full w-full" /></span>
-                  <span className="hidden text-xs font-bold uppercase tracking-wide sm:inline">{lng}</span>
-                </>
-              );
-              const cls = "flex items-center gap-1.5 rounded-full px-2 py-1 transition sm:px-2.5";
-              return lng === locale
-                ? <span key={lng} className={`${cls} bg-white text-forest shadow-sm`} aria-current="true" title={name}>{inner}</span>
-                : <Link key={lng} href={alt[lng]} onClick={setLang} hrefLang={lng} className={`${cls} text-stone opacity-70 hover:opacity-100`} aria-label={name} title={name}>{inner}</Link>;
-            })}
-          </div>
-          <a href={brand.dashboardUrl} className="ml-1 hidden rounded-full bg-forest px-4 py-2 text-[15px] font-semibold text-white transition-colors hover:bg-moss lg:inline-flex">{n.dashboard[locale]}</a>
+          <a href={brand.dashboardUrl} className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-forest text-white transition-colors hover:bg-moss" aria-label={n.dashboard[locale]} title={n.dashboard[locale]}>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M3.5 17.5a9 9 0 1117 0" /><path d="M12 14.5l4.5-4.5" /><circle cx="12" cy="15" r="1.4" /></svg>
+          </a>
           <Link href={href("shop", locale)} className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[15px] font-semibold transition-colors ${inShop ? "bg-lime-dark text-white" : "bg-lime text-forest hover:bg-lime-dark hover:text-white"}`}>
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M5 8h14l-1.2 11.2a2 2 0 01-2 1.8H8.2a2 2 0 01-2-1.8L5 8z" /><path d="M9 8V6.5a3 3 0 016 0V8" /></svg>
             {n.shop[locale]}
@@ -115,12 +102,28 @@ export default function Header({ locale, alt }: { locale: Locale; alt: Record<Lo
               {count > 0 && <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-lime px-1 text-[11px] font-bold text-forest">{count}</span>}
             </Link>
           )}
+          <Link href="/beheer" className="hidden rounded-full border border-forest px-4 py-2 text-[15px] font-semibold text-forest transition-colors hover:bg-forest hover:text-white sm:inline-flex">{n.admin[locale]}</Link>
           <button onClick={() => setOpen(true)} className="rounded-full p-2.5 text-forest hover:bg-mist lg:hidden" aria-label={n.menu[locale]} aria-expanded={open}>
             <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M4 7h16M4 12h16M4 17h16" /></svg>
           </button>
         </div>
       </div>
     </header>
+      <div className="fixed bottom-4 right-4 z-40 flex items-center rounded-full border border-line bg-white p-1 shadow-lg shadow-forest/10 sm:bottom-6 sm:right-6" role="group" aria-label="Taal / Language">
+        {(["nl", "en"] as Locale[]).map((lng) => {
+          const name = lng === "nl" ? "Nederlands" : "English";
+          const inner = (
+            <>
+              <span className="block h-[18px] w-[18px] overflow-hidden rounded-full ring-1 ring-black/10"><Flag lang={lng} className="h-full w-full" /></span>
+              <span className="text-xs font-bold uppercase tracking-wide">{lng}</span>
+            </>
+          );
+          const cls = "flex items-center gap-1.5 rounded-full px-2.5 py-1.5 transition";
+          return lng === locale
+            ? <span key={lng} className={`${cls} bg-mist text-forest`} aria-current="true" title={name}>{inner}</span>
+            : <Link key={lng} href={alt[lng]} onClick={setLang} hrefLang={lng} className={`${cls} text-stone opacity-70 hover:opacity-100`} aria-label={name} title={name}>{inner}</Link>;
+        })}
+      </div>
       {open && (
         <div className="fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-forest text-white lg:hidden" role="dialog" aria-modal="true">
           <div className="flex h-16 items-center justify-between px-4">
@@ -142,6 +145,7 @@ export default function Header({ locale, alt }: { locale: Locale; alt: Record<Lo
               </div>
             ))}
             <a href={brand.dashboardUrl} className="mt-6 rounded-full bg-lime px-5 py-3 text-center font-bold text-forest">{n.dashboard[locale]}</a>
+            <Link href="/beheer" className="mt-3 rounded-full border border-white/30 px-5 py-3 text-center font-bold text-white">{n.admin[locale]}</Link>
           </nav>
         </div>
       )}

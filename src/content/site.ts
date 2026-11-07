@@ -14,6 +14,7 @@ export const ui = {
     news: { nl: "Nieuws", en: "News" },
     contact: { nl: "Contact", en: "Contact" },
     dashboard: { nl: "Dashboard", en: "Dashboard" },
+    admin: { nl: "Beheer", en: "Admin" },
     menu: { nl: "Menu", en: "Menu" },
     close: { nl: "Sluiten", en: "Close" },
   },
